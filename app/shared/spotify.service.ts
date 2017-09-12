@@ -10,15 +10,14 @@ export class SpotifyService {
    }
 
    getToken(){
-    let searchUrl = 'https://api.spotify.com/v1/search';
-    return this._http.get(searchUrl)
-       .map(res => res.json()); 
+    var token = 'BQAE-PaxbW-gsJdwYCexuPbD7M-4Gczpgx1Ke1b7tudSGPKwkTmrPhk7RGlfuVZmQuh-SX_MdZbgM8zmrCuldtcY6-B_slhtIh_NqdA_ARbSLq9CfjtgQ-FJzhtLTNsmdczsRX7d0JQUYxexse60Dgj2fnx9IyWCDHIBbwTA5YG0zZk44I90EVWPITZf-B6lDgvO29aazTNpNAliHVGP54nVmusuw6gJqG8mbht6zYmd2s06ceIPj4pqeGBemRCm-Izt7IEFPJyVrXWwY1e6VV8_Vb3m2xIzVFXrDpUx5ZUkfdli5I3lByU1RlTiw_-YHMu3';
+    return token; 
    }
    
    searchMusic(str:string, type = 'artist') {
 
     let headers = new Headers();
-    let authToken = 'BQBDE7ebRyjMH569zFIt7p7Jpj83PFrvFELNv6kx8yFVvL7JR9DmnUFtW0Ekpy-Okf2SYr5PSbnONkGkpN8jB41EuYGuGpbtkX1wfzx8V7dLBfQ5mZlaI56SKPsdxiXGoi6YqFSXAmK6vqa0p1cKGXostHK6d6jGYrc0pCqhau5IBLmdqAhQc0GZJ_k5ePrugVaoC9otTaObJNef2DoIU_IY57_imEFTlf5qgU0YIUxd20dVaCVyoUvSFbpw498tUowOY_G7iFpBGkeXZJjtC9YrW6R9t-SLNyPvlEnMswYHNO2uJK0wkt4COW7Va7Z7usaU';
+    let authToken = this.getToken();
     headers.append('Authorization', 'Bearer '+authToken);
       let searchUrl = 'https://api.spotify.com/v1/search?query=' + str + '&offset=0&limit=20&type=' + type + '&market=US';
       return this._http.get(searchUrl, { headers })
@@ -26,20 +25,32 @@ export class SpotifyService {
    }
    
    getArtist(id:string) {
+
+      let headers = new Headers();
+      let authToken = this.getToken();
+      headers.append('Authorization', 'Bearer '+authToken);
       let artistUrl = 'https://api.spotify.com/v1/artists/' + id;
-      return this._http.get(artistUrl)
+      return this._http.get(artistUrl, { headers })
          .map(res => res.json());
    }
    
    getAlbums(artistId:string) {
+
+      let headers = new Headers();
+      let authToken = this.getToken();
+      headers.append('Authorization', 'Bearer '+authToken);
       let albumsUrl = 'https://api.spotify.com/v1/artists/' + artistId + '/albums';
-      return this._http.get(albumsUrl)
+      return this._http.get(albumsUrl, { headers })
          .map(res => res.json());
    }
    
    getAlbum(id:string) {
+
+      let headers = new Headers();
+      let authToken = this.getToken();
+      headers.append('Authorization', 'Bearer '+authToken);
       let albumUrl = 'https://api.spotify.com/v1/albums/' + id;
-      return this._http.get(albumUrl)
+      return this._http.get(albumUrl, { headers })
          .map(res => res.json());
    }
 }

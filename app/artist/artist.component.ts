@@ -1,5 +1,5 @@
 import { Artist } from "../shared/artist.type";
-//import { Album } from "../shared/album.type";
+import { Album } from "../shared/album.type";
 
 import { SpotifyService } from "../shared/spotify.service";
 import { ActivatedRoute } from "@angular/router";
